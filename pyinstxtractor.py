@@ -280,7 +280,7 @@ class PyInstArchive:
         os.chdir(extractionDir)
 
         for entry in self.tocList:
-            self.fPtr.seek(entry.position, os.SEEK_SET)
+            self.fPtr.seek(entry.position, (os.SEEK_END if entry.position < 0 else os.SEEK_SET))
             data = self.fPtr.read(entry.cmprsdDataSize)
 
             if entry.cmprsFlag == 1:
